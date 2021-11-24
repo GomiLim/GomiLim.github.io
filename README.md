@@ -1,96 +1,96 @@
-# liveconnect-frontend-assignment-poil_chxn
+# Liveconnect Frontend Assignment
+- 별도의 브랜치를 생성하여 작업(commit & push) 진행해주시면 됩니다.
+- master 브랜치에 merge 할 필요는 없습니다.
+- 브랜치 예시: dev
 
-- 이름: 임은정님
-- 플랫폼: 프로그래머스
-- 연락처: 01086852801
-- 이메일: poil_chxn@naver.com
+## 기능적 요구사항
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+- Dialog 형태의 공용 UI 컴포넌트를 개발합니다.
+- UI 컴포넌트 개발 패턴에는 제약사항이 없습니다.
+- vue.js, react.js 등 라이브러리 및 프레임워크 사용 없이, 반드시 순수 Javascript만을 사용해주세요.
+- 이외에, 번들러(Webpack, Rollup 등), CSS Pre-Processor, Typescript 및 Babel 등과 같은 기술 스택은 자유롭게 사용하셔도 무방합니다.
+- 개발된 Dialog UI 컴포넌트를 활용하여 다른 개발자들과의 협업을 가정합니다.
+- 아래의 예시를 참고해주세요.
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/liveconnect-dev/liveconnect-frontend-assignment-poil_chxn.git
-git branch -M main
-git push -uf origin main
+let someOptions = {...}
+let dialog = new CommonDialog(someOptions)
+
+dialog.open()
 ```
 
-## Integrate with your tools
+<br><br>
 
-- [ ] [Set up project integrations](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://gitlab.com/liveconnect-dev/liveconnect-frontend-assignment-poil_chxn/-/settings/integrations)
+## UI 예시 및 요구사항
+### 조회 뷰 예시
+<img width="600" height="337" src="https://resource.liveconnect.co.kr/recruit/frontend/imgs/1_lc_fe_assgn_readable_dialog.png" class="gfm js-lazy-loaded qa-js-lazy-loaded" loading="lazy">
 
-## Collaborate with your team
+### 편집 뷰 예시
+<img width="600" height="337" src="https://resource.liveconnect.co.kr/recruit/frontend/imgs/2_lc_fe_assgn_editable_dialog.png" alt="2_lc_fe_assgn_editable_dialog" class="gfm js-lazy-loaded qa-js-lazy-loaded" loading="lazy">
 
-- [ ] [Invite team members and collaborators](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+<br>
 
-## Test and Deploy
+### 요구사항
+- Dialog 컴포넌트 예시 이미지 외에 별도의 디자인 가이드는 없으며, 기본적으로 아래의 UI 요구사항을 만족하면 됩니다.
+- 표시되는 컨텐츠는 자유롭게 구성할 수 있습니다.
+- Label : 하나의 필드(Row)에 대한 타이틀(ID, Email, Mobile, Team 등)
+- Text : 하나의 필드(Row) 내 Label에 대한 정보
+<br>
+<img width="700" height="485" src="https://resource.liveconnect.co.kr/recruit/frontend/imgs/3_lc_fe_assgn_ui_feature.png" alt="3_lc_fe_assgn_ui_feature" class="gfm js-lazy-loaded qa-js-lazy-loaded" loading="lazy">
 
-Use the built-in continuous integration in GitLab.
+<br><br>
 
-- [ ] [Get started with GitLab CI/CD](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## API 명세
+- Dialog 컴포넌트에서 제공이 필요한 API는 아래와 같습니다.
+<br>
+<img width="700" height="334" src="https://resource.liveconnect.co.kr/recruit/frontend/imgs/4_lc_fe_assgn_api_feature.png" alt="4_lc_fe_assgn_api_feature" class="gfm js-lazy-loaded qa-js-lazy-loaded" loading="lazy">
 
-***
+<br><br>
 
-# Editing this README
+## Binding 가능 Events
+- 아래 목록의 이벤트를 바인딩하여 정의된 callback을 호출할 수 있어야 합니다.
+- 바인딩된 이벤트에 따른 callback 함수 호출 규약은 사전과제 참여자분께서 자유롭게 정할 수 있습니다.
+- 아래 예시를 참고해주세요.
+```
+let someOptions = {...}
+let dialog = new CommonDialog(someOptions)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://gitlab.com/-/experiment/new_project_readme_content:bad926ec13629c6a622db2a26cd312cf?https://www.makeareadme.com/) for this template.
+// open 이벤트 바인딩
+dialog.on('onOpen', (param) => {
+  // Do something...
+  // ex) Request some API on opening dialog.
+  // console.log(param)
+})
+// close 이벤트 바인딩
+dialog.on('onClose', (param) => {
+  // Do something...
+  // ex) Request some API after closing dialog.
+  // console.log(param)
+})
+// save 이벤트 바인딩
+dialog.on('onSave', (param) => {
+  // Do something...
+  // ex) Request some API on saving current information from dialog.
+  // console.log(param)
+})
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```
+<br>
+<img width="700" height="198" src="https://resource.liveconnect.co.kr/recruit/frontend/imgs/5_lc_fe_assgn_event_features.png" alt="5_lc_fe_assgn_event_features" class="gfm js-lazy-loaded qa-js-lazy-loaded" loading="lazy">
 
-## Name
-Choose a self-explaining name for your project.
+<br><br>
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## 제출 유의 사항
+- 제출해주신 사전과제 결과물 확인을 위한 가이드를 본 README 파일의 **가이드** 섹션에 반드시 작성해주세요.
+- 명시된 요구사항 외의 기능적 추가사항을 구현하여도 무방합니다.
+  - ex) 텍스트 입력 유효성 검사, 필수입력 항목 등
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+<br><br>
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
+## 가이드
+- 가이드 예시
+```
+1) npm run build
+2) http-server 등 패키지를 사용한 src/index.html 접속
+```
