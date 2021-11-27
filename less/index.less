@@ -1,0 +1,163 @@
+@primary-color: #1d365d;
+@secondary-color: #fff;
+@submit-button-color: #0276f9;
+@text-color: #212121;
+
+main#App {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+h1 {
+  color: @secondary-color;
+  margin-bottom: 30px;
+}
+//===============
+// main layout
+#main-layout {
+  width: 90%;
+  height: 90%;
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+//===============
+// user data list box
+#list-box {
+  display: flex;
+  flex-wrap: wrap;
+
+  .list-data {
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-right: 10px;
+    overflow: hidden;
+
+    p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+// =========
+// modal
+#modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(40, 76, 134, 0.6);
+
+  .dialog {
+    width: 30%;
+    min-width: 300px;
+    height: 35%;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #fff;
+
+    .dialog-title-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      h2 {
+        color: @primary-color;
+        font-weight: 600;
+      }
+      span.edit-title {
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      &:hover {
+        span.edit-title {
+          color: #dadce0;
+          opacity: 1;
+        }
+      }
+    }
+    ul {
+      li {
+        display: flex;
+        padding: 10px 0;
+        box-sizing: border-box;
+        label {
+          flex: 1;
+          text-transform: capitalize;
+          font-weight: 600;
+        }
+
+        input {
+          flex: 2.5;
+          border: 0;
+          border-bottom: 1px solid #dadce0;
+        }
+      }
+    }
+
+    .dialog-button-box {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+
+      button {
+        margin-left: 10px;
+        width: 50px;
+        text-align: right;
+        padding: 10px 0;
+        box-sizing: border-box;
+        color: @text-color;
+        &[class*='submit'] {
+          color: @submit-button-color;
+        }
+      }
+    }
+  }
+}
+// =======
+// add list button
+button#add-data {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border: 2px solid @secondary-color;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  &:after,
+  &:before {
+    content: '';
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background: @secondary-color;
+  }
+
+  &:before {
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,5 +1,3 @@
-const userList = [];
-
 class CommonDialog {
   constructor(data) {
     this.eventCallbacks = {};
@@ -8,7 +6,7 @@ class CommonDialog {
       isEdit: false,
     };
     this.formData = {
-      index: userList.length,
+      index: Date.now(),
       title: data.title ?? '',
       id: data.id ?? '',
       email: data.email ?? '',
@@ -19,7 +17,7 @@ class CommonDialog {
   }
 
   reset() {
-    this.dialogState.edit = false;
+    return (this.dialogState.edit = false);
   }
 
   on(event_name, callback) {
@@ -29,7 +27,7 @@ class CommonDialog {
   open() {
     if (this.eventCallbacks.onOpen) {
       this.dialogState.isVisible = true;
-      return this.dialogState.isVisible;
+      return this.eventCallbacks.onOpen(this.dialogState.isVisible);
     }
   }
 
@@ -41,9 +39,8 @@ class CommonDialog {
           return;
         }
       }
-      reset();
       this.dialogState.isVisible = false;
-      return this.dialogState.isVisible;
+      return this.eventCallbacks.onClose(this.dialogState.isVisible);
     }
   }
 
