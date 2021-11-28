@@ -12,6 +12,7 @@ const makeFormList = () => {
       $dialogLabel.innerText = data.label;
 
       let $dialogInput = document.createElement('input');
+      $dialogInput.className = 'border-style';
       $dialogInput.type = data.inputType;
       $dialogInput.name = data.label;
       $dialogInput.id = data.label;
@@ -23,7 +24,12 @@ const makeFormList = () => {
     } else {
       const $listTitle = document.createElement('h2');
       $listTitle.className = 'dialog-title';
-      $listTitle.innerText = '타이틀을 입력해주세요.';
+      const $listTitleInput = document.createElement('input');
+      $listTitleInput.name = 'title';
+      $listTitleInput.type = 'text';
+      $listTitleInput.className = 'border-style';
+      $listTitleInput.placeholder = '타이틀을 입력해주세요.';
+      $listTitle.appendChild($listTitleInput);
 
       const $listTitleEditBTN = document.createElement('span');
       $listTitleEditBTN.className = 'edit-title';
@@ -36,13 +42,16 @@ const makeFormList = () => {
 };
 
 const updateUserList = (userList) => {
-  console.log(userList);
   const $userListBox = document.createElement('li');
   $userListBox.className = 'list-data';
+  const $userListEditButton = document.createElement('span');
+  $userListEditButton.className = 'edit-data';
+  $userListEditButton.innerText = '수정하기';
   userList.at(-1).forEach((userData, index) => {
     const $userData = document.createElement('p');
     $userData.innerHTML = userData;
     $userListBox.appendChild($userData);
+    $userListBox.appendChild($userListEditButton);
   });
 
   $userListWrapper.prepend($userListBox);
