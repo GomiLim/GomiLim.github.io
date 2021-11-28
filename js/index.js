@@ -41,20 +41,70 @@ const makeFormList = () => {
   });
 };
 
-const updateUserList = (userList) => {
+const makeUpdateUserList = (userList) => {
   const $userListBox = document.createElement('li');
   $userListBox.className = 'list-data';
   const $userListEditButton = document.createElement('span');
   $userListEditButton.className = 'edit-data';
-  $userListEditButton.innerText = '수정하기';
+  $userListEditButton.innerText = '편집하기';
+
   userList.at(-1).forEach((userData, index) => {
-    const $userData = document.createElement('p');
-    $userData.innerHTML = userData;
-    $userListBox.appendChild($userData);
-    $userListBox.appendChild($userListEditButton);
+    if (!index) $userListEditButton.dataset.id = userData;
+    else {
+      const $userData = document.createElement('p');
+      $userData.innerHTML = userData;
+      $userListBox.appendChild($userData);
+      $userListBox.appendChild($userListEditButton);
+    }
   });
 
   $userListWrapper.prepend($userListBox);
+};
+
+const updateUserList = (userList, updateData) => {
+  let findUpdateDataIndex = userList.findIndex((list) => list[0] === updateData[0]);
+  userList[findUpdateDataIndex] = [...updateData];
+
+  document.querySelectorAll('.list-data').forEach((el) => el.remove());
+  userList.forEach((userData) => {
+    const $userListBox = document.createElement('li');
+    $userListBox.className = 'list-data';
+    const $userListEditButton = document.createElement('span');
+    $userListEditButton.className = 'edit-data';
+    $userListEditButton.innerText = '편집하기';
+    userData.forEach((data, index) => {
+      if (!index) $userListEditButton.dataset.id = data;
+      else {
+        const $userData = document.createElement('p');
+        $userData.innerHTML = data;
+        $userListBox.appendChild($userData);
+        $userListBox.appendChild($userListEditButton);
+      }
+    });
+    $userListWrapper.prepend($userListBox);
+  });
+};
+
+const setFormData = (reset = false, data, isEdit = false) => {
+  document.querySelector('input[name="title"]').value = reset ? '' : data.title;
+  document.querySelector('input[name="id"]').value = reset ? '' : data.id;
+  document.querySelector('input[name="email"]').value = reset ? '' : data.email;
+  document.querySelector('input[name="name"]').value = reset ? '' : data.name;
+  document.querySelector('input[name="mobile"]').value = reset ? '' : data.mobile;
+  document.querySelector('input[name="team"]').value = reset ? '' : data.team;
+};
+
+const editFormData = (isEdit = true, type = '') => {
+  if (type === 'title') {
+    document.querySelector('input[name="title"]').disabled = !isEdit;
+  } else {
+    document.querySelector('input[name="id"]').disabled = type === 'all' ? false : true;
+    document.querySelector('input[name="team"]').disabled = type === 'all' ? false : true;
+    document.querySelector('input[name="title"]').disabled = !isEdit;
+    document.querySelector('input[name="email"]').disabled = !isEdit;
+    document.querySelector('input[name="name"]').disabled = !isEdit;
+    document.querySelector('input[name="mobile"]').disabled = !isEdit;
+  }
 };
 
 window.onload = function () {

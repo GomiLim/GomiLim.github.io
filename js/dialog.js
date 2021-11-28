@@ -2,7 +2,6 @@ class CommonDialog {
   constructor(data) {
     this.eventCallbacks = {};
     this.dialogState = {
-      isVisible: false,
       isEdit: false,
     };
     this.formData = {
@@ -25,9 +24,18 @@ class CommonDialog {
   }
 
   open() {
+    $dialogModal.style.display = 'flex';
+    $dialogButtonBox.style.flexDirection = 'inherit';
+    $dialogButtonBox.style.justifyContent = 'flex-end';
+    if (this.formData.title) {
+      $saveBTN.innerText = '편집';
+      $cancelBTN.innerText = '닫기';
+    } else {
+      $saveBTN.innerText = '추가';
+      $cancelBTN.innerText = '취소';
+    }
     if (this.eventCallbacks.onOpen) {
-      this.dialogState.isVisible = true;
-      return this.eventCallbacks.onOpen(this.dialogState.isVisible);
+      return this.eventCallbacks.onOpen();
     }
   }
 
@@ -40,13 +48,14 @@ class CommonDialog {
         }
       }
       this.dialogState.isVisible = false;
-      return this.eventCallbacks.onClose(this.dialogState.isVisible);
+      return this.eventCallbacks.onClose();
     }
+    $dialogModal.style.display = 'none';
   }
 
-  changeTitle(editTitle) {
+  changeTitle(title) {
     const prevTitle = this.formData.title;
-    const newTitle = editTitle;
+    const newTitle = title;
 
     if (this.eventCallbacks.onBeforeChangeTitle) {
       const result = this.eventCallbacks.onBeforeChangeTitle({ prevTitle, newTitle });
@@ -55,68 +64,67 @@ class CommonDialog {
       }
     }
 
-    this.formData.title = editTitle;
-
+    this.formData = { ...this.formData, title };
     if (this.eventCallbacks.onChangeTitle) {
       this.eventCallbacks.onChangeTitle({ prevTitle, newTitle });
     }
   }
 
-  isEditTable() {
-    return (this.dialogState.isEdit = true);
+  isEditTable(edit) {
+    this.dialogState.isEdit = edit;
+    $dialogButtonBox.style.flexDirection = 'row-reverse';
+    $dialogButtonBox.style.justifyContent = 'flex-start';
+    $saveBTN.innerText = '저장';
+    $cancelBTN.innerText = '취소';
+    return editFormData(edit);
   }
 
   save(isEditUserData) {
+    const message = this.dialogState.isEdit;
     if (this.eventCallbacks.onSave) {
       const updateData = { ...this.formData, ...isEditUserData };
-      return updateData;
+      editFormData(false);
+      const userList = this.dialogState.isEdit ? updateData : Object.values(updateData);
+      this.dialogState.isEdit = false;
+      return this.eventCallbacks.onSave({
+        userList: userList,
+        message: message ? '수정되었습니다' : '생성되었습니다',
+      });
     }
   }
 
   cancel() {
     if (this.eventCallbacks.onCancel) {
+      if (this.dialogState.isEdit) {
+        if (!confirm('아직 저장되지 않은 정보가 있습니다.\n정말 취소하시겠습니까?')) {
+          return;
+        } else {
+          $saveBTN.innerText = '편집';
+          $cancelBTN.innerText = '닫기';
+          $dialogButtonBox.style.flexDirection = 'inherit';
+          $dialogButtonBox.style.justifyContent = 'flex-end';
+        }
+      }
       this.dialogState.isEdit = false;
-      return this.formData;
+      editFormData(false);
+      return this.eventCallbacks.onCancel({ userList: this.formData });
     }
   }
 
   getDataSource() {
-    const dataSource = Object.values(this.formData);
-    dataSource.shift();
-    return dataSource;
+    return Object.values(this.formData);
   }
 
   setDataSource(setData) {
-    this.formData.title = setData[0];
-    this.formData.id = setData[1];
-    this.formData.email = setData[2];
-    this.formData.name = setData[3];
-    this.formData.mobile = setData[4];
-    this.formData.team = setData[5];
+    const newData = setData[0];
+    this.formData.index = newData[0];
+    this.formData.title = newData[1];
+    this.formData.id = newData[2];
+    this.formData.email = newData[3];
+    this.formData.name = newData[4];
+    this.formData.mobile = newData[5];
+    this.formData.team = newData[6];
+
     return this.formData;
   }
 }
-
-let dialog = new CommonDialog({ title: 'before', name: '임고미', id: 'poilchxn' });
-
-dialog.on('onOpen', (param) => {});
-
-dialog.on('onClose', () => {});
-
-dialog.on('onBeforeClose', (param) => {
-  return confirm(`저장되지 않은 정보가 있습니다.\n정말 취소하시겠습니까?`);
-});
-
-dialog.on('onChangeTitle', (param) => {
-  const { prevTitle, newTitle } = param;
-  alert(`타이틀이 ${prevTitle} 에서 ${newTitle}로 변했습니다.`);
-});
-
-dialog.on('onBeforeChangeTitle', (param) => {
-  const { prevTitle, newTitle } = param;
-  return confirm(`정말 ${prevTitle} 에서 ${newTitle}로 바꾸시겠습니까?`);
-});
-
-dialog.on('onSave', (param) => {});
-
-dialog.on('onCancel', (param) => {});

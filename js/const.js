@@ -8,6 +8,7 @@ const $dialogModal = document.querySelector('#modal');
 const $dialogWrapper = document.querySelector('.dialog');
 const $dialogListBox = document.querySelector('.dialog ul');
 const $dialogTitleBox = document.querySelector('.dialog-title-box');
+const $dialogButtonBox = document.querySelector('.dialog-button-box');
 
 const userList = [];
 
