@@ -3,6 +3,14 @@
 @submit-button-color: #0276f9;
 @text-color: #212121;
 
+//==========
+//common style
+
+.border-style {
+  border: 0;
+  border-bottom: 1px solid #dadce0;
+}
+
 main#App {
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   width: 100vw;
@@ -44,11 +52,32 @@ h1 {
     font-size: 14px;
     margin-right: 10px;
     overflow: hidden;
-
+    position: relative;
     p {
       text-overflow: ellipsis;
       overflow: hidden;
       margin-bottom: 5px;
+    }
+    .edit-data {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(40, 76, 134, 0.8);
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      border: 1px solid @secondary-color inset;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    &:hover {
+      .edit-data {
+        display: flex;
+      }
     }
   }
 }
@@ -84,6 +113,9 @@ h1 {
       h2 {
         color: @primary-color;
         font-weight: 600;
+        input {
+          font-size: 20px;
+        }
       }
       span.edit-title {
         opacity: 0;
@@ -103,15 +135,23 @@ h1 {
         padding: 10px 0;
         box-sizing: border-box;
         label {
+          position: relative;
           flex: 1;
           text-transform: capitalize;
           font-weight: 600;
+
+          &::before {
+            content: '*';
+            color: red;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: calc(100% + 5px);
+          }
         }
 
         input {
           flex: 2.5;
-          border: 0;
-          border-bottom: 1px solid #dadce0;
         }
       }
     }
@@ -135,6 +175,7 @@ h1 {
     }
   }
 }
+
 // =======
 // add list button
 button#add-data {
