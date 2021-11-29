@@ -35,7 +35,6 @@ $saveBTN.addEventListener('click', () => {
     for (var pair of formData.entries()) {
       editData[`${pair[0]}`] = pair[1];
     }
-    const emptyData = Object.values(editData).some((data) => !data);
 
     if (isEditing) {
       dialog.on('onSave', (getData) => {
@@ -44,8 +43,8 @@ $saveBTN.addEventListener('click', () => {
         dialog.close();
         updateUserList(userList, Object.values(getData.userList));
       });
-      if (emptyData) return alert('값을 모두 입력해주세요');
-      else {
+
+      if (checkValidate(editData, 'edit')) {
         dialog.save(editData);
       }
     } else {
@@ -61,9 +60,7 @@ $saveBTN.addEventListener('click', () => {
       setFormData(true, {});
       dialog.close();
     });
-    const emptyData = Object.values(setData).some((data) => !data);
-    if (emptyData) return alert('값을 모두 입력해주세요');
-    else {
+    if (checkValidate(setData)) {
       dialog.save(setData);
     }
   }

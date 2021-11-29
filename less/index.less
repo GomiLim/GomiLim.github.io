@@ -98,7 +98,6 @@ h1 {
   .dialog {
     width: 30%;
     min-width: 300px;
-    height: 35%;
     padding: 25px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -111,8 +110,18 @@ h1 {
       margin-bottom: 20px;
 
       h2 {
+        position: relative;
         color: @primary-color;
         font-weight: 600;
+        &::before {
+          content: '*';
+          color: red;
+          font-size: 16px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: calc(100% + 5px);
+        }
         input {
           font-size: 20px;
         }
