@@ -6,12 +6,12 @@ class CommonDialog {
     };
     this.formData = {
       index: Date.now(),
-      title: data.title ?? '',
-      id: data.id ?? '',
-      email: data.email ?? '',
-      name: data.name ?? '',
-      mobile: data.mobile ?? '',
-      team: data.team ?? '',
+      title: data.title ?? "",
+      id: data.id ?? "",
+      email: data.email ?? "",
+      name: data.name ?? "",
+      mobile: data.mobile ?? "",
+      team: data.team ?? "",
     };
   }
 
@@ -24,15 +24,15 @@ class CommonDialog {
   }
 
   open() {
-    $dialogModal.style.display = 'flex';
-    $dialogButtonBox.style.flexDirection = 'inherit';
-    $dialogButtonBox.style.justifyContent = 'flex-end';
+    $dialogModal.style.display = "flex";
+    $dialogButtonBox.style.flexDirection = "inherit";
+    $dialogButtonBox.style.justifyContent = "flex-end";
     if (this.formData.title) {
-      $saveBTN.innerText = '편집';
-      $cancelBTN.innerText = '닫기';
+      $saveBTN.innerText = "편집";
+      $cancelBTN.innerText = "닫기";
     } else {
-      $saveBTN.innerText = '추가';
-      $cancelBTN.innerText = '취소';
+      $saveBTN.innerText = "추가";
+      $cancelBTN.innerText = "취소";
     }
     if (this.eventCallbacks.onOpen) {
       return this.eventCallbacks.onOpen();
@@ -50,7 +50,7 @@ class CommonDialog {
       this.dialogState.isVisible = false;
       return this.eventCallbacks.onClose();
     }
-    $dialogModal.style.display = 'none';
+    $dialogModal.style.display = "none";
   }
 
   changeTitle(title) {
@@ -58,7 +58,10 @@ class CommonDialog {
     const newTitle = title;
 
     if (this.eventCallbacks.onBeforeChangeTitle) {
-      const result = this.eventCallbacks.onBeforeChangeTitle({ prevTitle, newTitle });
+      const result = this.eventCallbacks.onBeforeChangeTitle({
+        prevTitle,
+        newTitle,
+      });
       if (!result) {
         return;
       }
@@ -72,10 +75,10 @@ class CommonDialog {
 
   isEditTable(edit) {
     this.dialogState.isEdit = edit;
-    $dialogButtonBox.style.flexDirection = 'row-reverse';
-    $dialogButtonBox.style.justifyContent = 'flex-start';
-    $saveBTN.innerText = '저장';
-    $cancelBTN.innerText = '취소';
+    $dialogButtonBox.style.flexDirection = "row-reverse";
+    $dialogButtonBox.style.justifyContent = "flex-start";
+    $saveBTN.innerText = "저장";
+    $cancelBTN.innerText = "취소";
     return editFormData(edit);
   }
 
@@ -84,11 +87,13 @@ class CommonDialog {
     if (this.eventCallbacks.onSave) {
       const updateData = { ...this.formData, ...isEditUserData };
       editFormData(false);
-      const userList = this.dialogState.isEdit ? updateData : Object.values(updateData);
+      const userList = this.dialogState.isEdit
+        ? updateData
+        : Object.values(updateData);
       this.dialogState.isEdit = false;
       return this.eventCallbacks.onSave({
         userList: userList,
-        message: message ? '수정되었습니다' : '생성되었습니다',
+        message: message ? "수정되었습니다" : "생성되었습니다",
       });
     }
   }
@@ -96,13 +101,17 @@ class CommonDialog {
   cancel() {
     if (this.eventCallbacks.onCancel) {
       if (this.dialogState.isEdit) {
-        if (!confirm('아직 저장되지 않은 정보가 있습니다.\n정말 취소하시겠습니까?')) {
+        if (
+          !confirm(
+            "아직 저장되지 않은 정보가 있습니다.\n정말 취소하시겠습니까?"
+          )
+        ) {
           return;
         } else {
-          $saveBTN.innerText = '편집';
-          $cancelBTN.innerText = '닫기';
-          $dialogButtonBox.style.flexDirection = 'inherit';
-          $dialogButtonBox.style.justifyContent = 'flex-end';
+          $saveBTN.innerText = "편집";
+          $cancelBTN.innerText = "닫기";
+          $dialogButtonBox.style.flexDirection = "inherit";
+          $dialogButtonBox.style.justifyContent = "flex-end";
         }
       }
       this.dialogState.isEdit = false;
